@@ -31,16 +31,16 @@ Test the C Program for the desired output.
 #include <unistd.h>
 
 int main() {
-int pid = fork();
+    int pid = fork();
 
-if (pid == 0) { 
-    printf("I am child, my PID is %d\n", getpid()); 
-    printf("My parent PID is: %d\n", getppid()); 
-    sleep(2);  // Keep child alive for verification
-} else { 
-    printf("I am parent, my PID is %d\n", getpid()); 
-    wait(NULL); 
-}
+    if (pid == 0) { 
+        printf("I am child, my PID is %d\n", getpid()); 
+        printf("My parent PID is: %d\n", getppid()); 
+        sleep(2);  // Keep child alive for verification
+    } else { 
+        printf("I am parent, my PID is %d\n", getpid()); 
+        wait(NULL); 
+    }
 }
 ```
 
@@ -54,9 +54,10 @@ if (pid == 0) {
 
 
 
-##OUTPUT
+## OUTPUT
+<img width="687" height="596" alt="image" src="https://github.com/user-attachments/assets/3c97464d-b32e-4c4e-802f-1f69ad00f17d" />
 
-![op1](https://github.com/user-attachments/assets/b926f705-d170-4758-ae22-825b8f1fb013)
+
 
 
 
@@ -73,38 +74,38 @@ if (pid == 0) {
 #include <unistd.h>
 
 int main() {
-int status;
-
-printf("Running ps with execl\n");
-if (fork() == 0) {
-    execl("ps", "ps", "-f", NULL);
-    perror("execl failed");
-    exit(1);
-}
-wait(&status);
-
-if (WIFEXITED(status)) {
-    printf("Child exited with status: %d\n", WEXITSTATUS(status));
-} else {
-    printf("Child did not exit successfully\n");
-}
-
-printf("Running ps with execlp (without full path)\n");
-if (fork() == 0) {
-    execlp("ps", "ps", "-f", NULL);
-    perror("execlp failed");
-    exit(1);
-}
-wait(&status);
-
-if (WIFEXITED(status)) {
-    printf("Child exited for execlp with status: %d\n", WEXITSTATUS(status));
-} else {
-    printf("Child did not exit successfully\n");
-}
-
-printf("Done.\n");
-return 0;
+    int status;
+    
+    printf("Running ps with execl\n");
+    if (fork() == 0) {
+        execl("ps", "ps", "-f", NULL);
+        perror("execl failed");
+        exit(1);
+    }
+    wait(&status);
+    
+    if (WIFEXITED(status)) {
+        printf("Child exited with status: %d\n", WEXITSTATUS(status));
+    } else {
+        printf("Child did not exit successfully\n");
+    }
+    
+    printf("Running ps with execlp (without full path)\n");
+    if (fork() == 0) {
+        execlp("ps", "ps", "-f", NULL);
+        perror("execlp failed");
+        exit(1);
+    }
+    wait(&status);
+    
+    if (WIFEXITED(status)) {
+        printf("Child exited for execlp with status: %d\n", WEXITSTATUS(status));
+    } else {
+        printf("Child did not exit successfully\n");
+    }
+    
+    printf("Done.\n");
+    return 0;
 }
 ```
 
@@ -112,40 +113,10 @@ return 0;
 
 
 
+## OUTPUT
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##OUTPUT
-
-
-
-
-![op2](https://github.com/user-attachments/assets/f5032cac-4eeb-4004-bc76-4ab034f91ba1)
-
-
-
-
-
-
-
-
-
+<img width="598" height="278" alt="image" src="https://github.com/user-attachments/assets/23ca5e71-0257-466d-89a7-dcfd67e2e280" />
 
 
 
